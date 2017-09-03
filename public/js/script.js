@@ -33,6 +33,8 @@ function getAllBlog() {
     success: function(DataFromBlog) {
 
       console.log(DataFromBlog);
+      $('.blogName').append(DataFromBlog.name);
+      $('.blogUrl').append(DataFromBlog.url)
 
       getPosts()
     },
@@ -51,6 +53,12 @@ function getPosts(){
     success: function(DataFromBlog) {
 
       console.log(DataFromBlog);
+      for (var i = 0; i < DataFromBlog.items.length; i++) {
+
+        $('.posts').append("<div class='post'><h1 class='h1title'>"+DataFromBlog.items[i].title+"</h1><p class='author'>"+DataFromBlog.items[i].author.displayName+"</p><p class='date'>"+new Date(DataFromBlog.items[i].published)+"</p><p class='content'>"+DataFromBlog.items[i].content+"</p></div>")
+
+      }
+
 
 
     },
@@ -61,22 +69,22 @@ function getPosts(){
 
 }
 
-
-function createPost(){
-  $.ajax({
-    url: "https://www.googleapis.com/blogger/v3/blogs/"+blogId+"/posts/",
-    dataType: "jsonp",
-    success: function(DataFromBlog) {
-
-      console.log(DataFromBlog);
-
-
-    },
-    error: function() {
-      console.log("Something went wrong");
-    }
-  });
-
-
-
-}
+// function createPost(){
+//   $.ajax({
+//     url: "https://www.googleapis.com/blogger/v3/blogs/"+blogId+"/posts/",
+//     Authorization:
+//     dataType: "jsonp",
+//     success: function(DataFromBlog) {
+//
+//       console.log(DataFromBlog);
+//
+//
+//     },
+//     error: function() {
+//       console.log("Something went wrong");
+//     }
+//   });
+//
+//
+//
+// }
