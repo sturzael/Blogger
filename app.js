@@ -1,7 +1,7 @@
 var express= require('express');
 var app = express();
 var cors = require('cors');
-
+var path = require("path");
 
 
 
@@ -15,7 +15,8 @@ app.use(function(request, response, next){
 })
 
 app.use(express.static("./public"));
-
+// Linking up config 
+app.use('/data', express.static(path.join(__dirname, 'data')));
 
 
 
