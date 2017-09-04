@@ -1,5 +1,8 @@
-var key;
-var blogId = "4165291039125780596";
+var key,
+    blogId = "4165291039125780596",
+    keyList = []
+    discoveryDocs = ["https://people.googleapis.com/$discovery/rest?version=v1"],
+    scopes = "profile";
 
 $.ajax({
   url: "data/config.json",
@@ -12,11 +15,15 @@ $.ajax({
   },
     success: function(DataFromJson) {
 
-    key = DataFromJson.key;
-    console.log(key);
+    keyList.push({
+      apiKey: DataFromJson.apiKey,
+      clientId: DataFromJson.clientId,
+      clientSecret: DataFromJson.clientSecret
+    });
 
-getAllBlog();
+    key = keyList[0].apiKey;
 
+    getAllBlog();
 
   },
   error: function() {
@@ -88,3 +95,20 @@ function getPosts(){
 //
 //
 // }
+
+
+// Getting Authentication for Google Blogger
+function handleClientLoad(){
+  gapi.load("clientauth2", initClient);
+}
+
+function initClient(){
+  gapi.client.init({
+    apiKey: keyList.apiKey,
+    discoveryDocs: discoveryDocs,
+    clientId: keyList.clientId,
+    scope: scopes
+  }).then(function(){
+    
+  })
+}

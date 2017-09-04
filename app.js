@@ -5,10 +5,10 @@ var path = require("path");
 
 app.use(cors());
 
-app.use(function(request, response, next){
-  console.log(`${request.method} request for ${request.url}`);
-  next();
-})
+// app.use(function(request, response, next){
+//   console.log(`${request.method} request for ${request.url}`);
+//   next();
+// })
 
 app.use(express.static("./public"));
 
