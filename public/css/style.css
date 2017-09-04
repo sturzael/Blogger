@@ -56,3 +56,8 @@ body{
     padding-right: 15vw;
     padding-top: 63px;
 }
+
+form{
+	width:80%;
+	margin:10px 10%;
+}

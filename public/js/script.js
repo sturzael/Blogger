@@ -66,7 +66,7 @@ function getPosts(){
 
       }
 
-
+      // createPost();
 
     },
     error: function() {
@@ -79,25 +79,25 @@ function getPosts(){
 // function createPost(){
 //   $.ajax({
 //     url: "https://www.googleapis.com/blogger/v3/blogs/"+blogId+"/posts/",
-//     Authorization:
+//     Authorization: "",
 //     dataType: "jsonp",
 //     success: function(DataFromBlog) {
-//
+
 //       console.log(DataFromBlog);
-//
-//
+
+
 //     },
 //     error: function() {
 //       console.log("Something went wrong");
 //     }
 //   });
-//
-//
-//
+
+
+
 // }
 
-
 // Getting Authentication for Google Blogger
+// https://www.googleapis.com/auth/blogger
 var discoveryDocs = ["https://people.googleapis.com/$discovery/rest?version=v1"];
 var authorizeButton = document.getElementById('authorize-button');
 var signoutButton = document.getElementById('signout-button');
@@ -163,5 +163,30 @@ function makeApiCall(){
     var name = resp.result.names[0].givenName;
     p.appendChild(document.createTextNode('Hello, '+name+'!'));
     document.getElementById('content').appendChild(p);
+    console.log(resp);
   });
 }
+
+$("#postBlog").submit(function(event){
+
+  // Preventing Form Submission
+  event.preventDefault();
+
+  // Setting variables to retrieve information
+  var title = $("#postTitle").val();
+  var message = $("#postMessage").val();
+  var url = "http://localhost:3000";
+
+  url += "/send=" + title;
+
+  $.ajax({
+    url: url,
+    type: "post",
+    dataType: "json",
+    success:function(PostData){
+      console.log("Message: " + PostData + " was sent.");
+    }, error:function(){
+      console.log("url undefined");
+    }
+  });
+});

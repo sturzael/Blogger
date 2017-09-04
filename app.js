@@ -5,10 +5,10 @@ var path = require("path");
 
 app.use(cors());
 
-// app.use(function(request, response, next){
-//   console.log(`${request.method} request for ${request.url}`);
-//   next();
-// })
+app.use(function(request, response, next){
+  console.log(`${request.method} request for ${request.url}`);
+  next();
+})
 
 app.use(express.static("./public"));
 
@@ -21,6 +21,13 @@ app.use("/js", express.static(path.join(__dirname, "node_modules/jquery/dist")))
 // bootstrap js and css
 app.use("/js", express.static(path.join(__dirname, "node_modules/bootstrap/dist/js")));
 app.use("/css", express.static(path.join(__dirname, "node_modules/bootstrap/dist/css")));
+
+// Posting to Blogger
+app.post("/send=:message", function(request, response){
+	var message = request.params.message;
+	var params = {status:message}
+	console.log(message);
+});
 
 app.listen(3000);
 
