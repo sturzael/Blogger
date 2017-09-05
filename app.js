@@ -2,6 +2,7 @@ var express= require('express');
 var app = express();
 var cors = require('cors');
 var path = require("path");
+var config = require("./data/config.json");
 
 app.use(cors());
 
@@ -34,5 +35,7 @@ app.post("/sendMessage=:message", function(request, response){
 });
 
 app.listen(3000);
+
+console.log(config.apiKey);
 
 console.log("server running on port 3000");
