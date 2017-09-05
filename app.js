@@ -23,9 +23,13 @@ app.use("/js", express.static(path.join(__dirname, "node_modules/bootstrap/dist/
 app.use("/css", express.static(path.join(__dirname, "node_modules/bootstrap/dist/css")));
 
 // Posting to Blogger
-app.post("/send=:message", function(request, response){
+app.post("/sendTitle=:title", function(request, response){
+	var title = request.params.title;
+	console.log(title);
+});
+
+app.post("/sendMessage=:message", function(request, response){
 	var message = request.params.message;
-	var params = {status:message}
 	console.log(message);
 });
 

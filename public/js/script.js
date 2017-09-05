@@ -177,7 +177,7 @@ $("#postBlog").submit(function(event){
   var message = $("#postMessage").val();
   var url = "http://localhost:3000";
 
-  url += "/send=" + title;
+  url += "/sendTitle=" + title + "/sendMessage=" + message;
 
   $.ajax({
     url: url,
