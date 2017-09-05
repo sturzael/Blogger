@@ -1,15 +1,15 @@
 <!DOCTYPE html>
 <html>
 	<head>
-	<title>Blogging Test</title>
+		<title>Blogging Test</title>
 
-	<meta charset="utf-8">
-	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
-	<link rel="stylesheet" href="css/style.css">
+		<meta charset="utf-8">
+		<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+		<link rel="stylesheet" href="css/style.css">
 
 	</head>
-<body>
 
+<<<<<<< HEAD
   <div class="title">
     <div class="imgDiv">
 
@@ -29,20 +29,58 @@
     <button id="signout-button" style="display: none;">Sign Out</button>
 
     <div id="content"></div>
+=======
+	<body>
+		<ul class="nav justify-content-end">
+			<li class="nav-item">
+				<a class="nav-link active" href="#">Active</a>
+			</li>
+			
+			<li class="nav-item">
+				<a class="nav-link" href="#">Link</a>
+			</li>
+			
+			<li class="nav-item">
+				<a class="nav-link" href="#">Link</a>
+			</li>
+			
+			<li class="nav-item">
+				<a class="nav-link disabled" href="#">Disabled</a>
+			</li>
+		</ul>
+
+		<div class="title">
+
+			<div class="imgDiv"></div>
+			<div class="blogName"></div>
+			<div class="blogUrl"></div>
+
+		</div>
+
+		<p>Say hello using the People API.</p>
+
+		<!--Add buttons to initiate auth sequence and sign out-->
+		<button id="authorize-button" style="display: none;">Authorize</button>
+		<button id="signout-button" style="display: none;">Sign Out</button>
+
+		<div class="posts"></div>
+		<div id="content"></div>
+
+		<form id="postBlog" method="POST" action="/">
+			<!-- Title of Blog -->
+			<label for="postTitle">Post Title</label>
+			<input type="text" name="postTitle" id="postTitle" class="form-control" placeholder="What are you gonna call it?">
+
+			<!-- Blog Message -->
+			<label for="postMessage">Message</label>
+			<textarea class="form-control" rows="5" name="postMessage" id="postMessage" placeholder="What's your blog content?"></textarea>
+
+			<!-- Submit -->
+			<input type="submit" name="submit" id="submit" class="btn btn-primary" value="Send">
+		</form>
+>>>>>>> e06ac55a832e3a2b67b25cd15c6a50508e8e24cf
 
   </div>
-
-	<!-- <div class="jumbotron">
-
-		<h1 class="display-3">Hello, world!</h1>
-
-		<p class="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
-
-		<hr class="my-4">
-
-		<p>It uses utility classes for typography and spacing to space content out within the larger container.</p>
-
-	</div> -->
 
 	<script src="https://apis.google.com/js/api.js"></script>
 
@@ -58,5 +96,5 @@
 	<!-- Our JavaScript -->
 	<script type="text/javascript" src="js/script.js">
 	</script>
-</body>
+	</body>
 </html>
