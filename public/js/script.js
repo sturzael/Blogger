@@ -1,5 +1,5 @@
 var key,
-    blogId = "4165291039125780596",
+    blogId,
     keyList = []
     discoveryDocs = ["https://people.googleapis.com/$discovery/rest?version=v1"],
     scopes = "profile";
@@ -17,13 +17,17 @@ $.ajax({
 
     keyList.push({
       apiKey: DataFromJson.apiKey,
+      blogId:DataFromJson.blogId,
       clientId: DataFromJson.clientId,
       clientSecret: DataFromJson.clientSecret
     });
 
     key = keyList[0].apiKey;
+    blogId = keyList[0].blogId;
 
-    getAllBlog();
+    console.log(blogId);
+
+    // getAllBlog();
 
   },
   error: function() {
@@ -43,7 +47,7 @@ function getAllBlog() {
       $('.blogName').append(DataFromBlog.name);
       $('.blogUrl').append(DataFromBlog.url)
 
-      getPosts()
+      // getPosts()
     },
     error: function() {
       console.log("Something went wrong");
@@ -102,7 +106,7 @@ var discoveryDocs = ["https://people.googleapis.com/$discovery/rest?version=v1"]
 var authorizeButton = document.getElementById('authorize-button');
 var signoutButton = document.getElementById('signout-button');
 
-handleClientLoad();
+// handleClientLoad();
 
 function handleClientLoad(){
   // Loading the Google Client JavaScript Authentication Library
