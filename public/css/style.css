@@ -12,35 +12,33 @@ body, html{
 }
 .title{
 	width: 100vw;
-	height: 50vh;
-	max-height: 550px;
-	/*background-color: rgb(238, 101, 64);*/
-
+	height: auto;
+	padding-top:50px;
 }
 .imgDiv{
 	background-color: black;
 	width: 200px;
 	height: 200px;
 	-webkit-border-radius: 100px;
--moz-border-radius: 100px;
-border-radius: 100px;
-position: relative;
- top: 50%;
- transform: translateY(-50%);
- margin: 0 auto;
- background-image: url("person.jpg");
- background-size: cover;
+	-moz-border-radius: 100px;
+	border-radius: 100px;
+	position: relative;
+	top: 90%;
+	left:50%;
+	transform: translate(-50%, -10%);
+	background-image: url("person.jpg");
+	background-size: cover;
 
 }
 .blogName{
 	margin: 0 auto;
-text-align: center;
-font-size: 40px;
-padding-top: 19vh;
-color: #525252;
+	text-align: center;
+	font-size: 40px;
+	color: #525252;
 }
 .blogUrl{
 	margin: 0 auto;
+	margin-bottom:20px;
     text-align: center;
     font-size: 12px;
     padding-top: 2vh;
@@ -52,12 +50,25 @@ body{
 }
 
 .post{
-	padding-left: 15vw;
-    padding-right: 15vw;
-    padding-top: 63px;
+    padding:20px;
+    width:80%;
+    margin:20px 10%;
+    box-shadow:0px 0px 2px #333;
 }
 
 form{
 	width:80%;
 	margin:10px 10%;
+}
+
+.nav-item{
+	text-align:center;
+}
+
+#submit{
+	margin-top:20px;
+}
+
+label{
+	margin-top:10px;
 }

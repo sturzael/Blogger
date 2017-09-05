@@ -41,8 +41,7 @@ $.ajax({
       key = keyList[0].apiKey;
       blogId = keyList[0].blogId;
 
-      // getStuff();
-      // getAllBlog();
+      getStuff();
   },
   error: function() {
     console.log("Something Went Wrong");
@@ -64,7 +63,7 @@ function getStuff() {
       $('.blogName').append(DataFromBlog.name);
       $('.blogUrl').append(DataFromBlog.url)
 
-      // getPosts()
+      getPosts()
     },
     error: function() {
       console.log("Something went wrong");
@@ -89,9 +88,6 @@ function getPosts(){
 <<<<<<< HEAD
 =======
       }
-      // console.log(DataFromBlog);
-
-      // createPost();
 
 >>>>>>> Massey
     },
@@ -129,6 +125,7 @@ function start() {
 =======
 }
 
+<<<<<<< HEAD
 // function createPost(){
 //   $.ajax({
 //     url: "https://www.googleapis.com/blogger/v3/blogs/"+blogId+"/posts/",
@@ -264,4 +261,34 @@ function start() {
 // };
 
 //  gapi.load("client", start);
+>>>>>>> Massey
+=======
+$("#postBlog").submit(function(event){
+    event.preventDefault();
+
+    var title = $("#postTitle").val();
+    var message = $("#postMessage").val();
+    var url = "http://localhost:3000";
+
+    // Validation
+    if( (title.length === 0) || (message.length === 0) ){
+        alert("Please fill in both fields");
+        return;
+    } else {
+        url += "/sendTitle=" + title + "/sendMessage=" + message;
+    }
+
+    $.ajax({
+        url: url,
+        dataType:"json",
+        method:"post",
+        success:function(DataPost){
+            console.log(DataPost);
+        }, error:function(){
+            console.log("Error, server not responding.");
+        }
+    })
+
+    console.log(title, message);
+});
 >>>>>>> Massey
