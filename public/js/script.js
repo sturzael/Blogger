@@ -1,14 +1,8 @@
-<<<<<<< HEAD
 var key,
     blogId,
     keyList = []
     discoveryDocs = ["https://people.googleapis.com/$discovery/rest?version=v1"],
     scopes = "profile";
-=======
-var key;
-var blogId = "4165291039125780596";
-var keyList = [];
->>>>>>> master
 
 $.ajax({
   url: "data/config.json",
@@ -21,23 +15,21 @@ $.ajax({
   },
     success: function(DataFromJson) {
 
-    keyList.push({
-      apiKey: DataFromJson.apiKey,
-<<<<<<< HEAD
-      blogId:DataFromJson.blogId,
-      clientId: DataFromJson.clientId,
-      clientSecret: DataFromJson.clientSecret
-    });
+      keyList.push({
+        apiKey: DataFromJson.apiKey,
+        blogId:DataFromJson.blogId,
+        clientId: DataFromJson.clientId,
+        clientSecret: DataFromJson.clientSecret
+      });
 
-    key = keyList[0].apiKey;
-    blogId = keyList[0].blogId;
-=======
+      key = keyList[0].apiKey;
+      blogId = keyList[0].blogId;
       clientId: DataFromJson.clientId,
       clientSecret: DataFromJson.clientSecret
+
     })
 
     // getStuff();
->>>>>>> master
 
     console.log(blogId);
 
@@ -56,8 +48,6 @@ function getStuff() {
     url: "https://www.googleapis.com/blogger/v3/blogs/"+blogId+"?key=" + key,
     dataType: "jsonp",
     success: function(DataFromBlog) {
-
-<<<<<<< HEAD
       console.log(DataFromBlog);
       $('.blogName').append(DataFromBlog.name);
       $('.blogUrl').append(DataFromBlog.url)
@@ -84,9 +74,7 @@ function getPosts(){
         $('.posts').append("<div class='post'><h1 class='h1title'>"+DataFromBlog.items[i].title+"</h1><p class='author'>"+DataFromBlog.items[i].author.displayName+"</p><p class='date'>"+new Date(DataFromBlog.items[i].published)+"</p><p class='content'>"+DataFromBlog.items[i].content+"</p></div>")
 
       }
-=======
       // console.log(DataFromBlog);
->>>>>>> master
 
       // createPost();
 
@@ -98,7 +86,6 @@ function getPosts(){
 
 }
 
-<<<<<<< HEAD
 // function createPost(){
 //   $.ajax({
 //     url: "https://www.googleapis.com/blogger/v3/blogs/"+blogId+"/posts/",
@@ -213,7 +200,7 @@ $("#postBlog").submit(function(event){
     }
   });
 });
-=======
+
 function start() {
   // 2. Initialize the JavaScript client library.
   gapi.client.init({
@@ -234,4 +221,3 @@ function start() {
 };
 
  gapi.load("client", start);
->>>>>>> master
