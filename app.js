@@ -12,7 +12,7 @@ app.use(cors());
 
 app.use(express.static("./public"));
 
-// Linking up config 
+// Linking up config
 app.use('/data', express.static(path.join(__dirname, 'data')));
 
 // jquery

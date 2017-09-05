@@ -66,7 +66,7 @@ function getPosts(){
 
       }
 
-
+      createPost();
 
     },
     error: function() {
@@ -76,25 +76,25 @@ function getPosts(){
 
 }
 
-// function createPost(){
-//   $.ajax({
-//     url: "https://www.googleapis.com/blogger/v3/blogs/"+blogId+"/posts/",
-//     Authorization:
-//     dataType: "jsonp",
-//     success: function(DataFromBlog) {
-//
-//       console.log(DataFromBlog);
-//
-//
-//     },
-//     error: function() {
-//       console.log("Something went wrong");
-//     }
-//   });
-//
-//
-//
-// }
+function createPost(){
+  $.ajax({
+    url: "https://www.googleapis.com/blogger/v3/blogs/"+blogId+"/posts/",
+    Authorization: "ya29.Glu8BDpgLCf5KLwzprifKMiO8SG0n27UdT4_Vg6cmMRvgpv_1e2wPkhrd8SAk4januD0idhxyxKfLHr3wYupTOpM98biEzR8JTTAwhjs-TmTqG223GxcDHb0676i",
+    dataType: "jsonp",
+    success: function(DataFromBlog) {
+
+      console.log(DataFromBlog);
+
+
+    },
+    error: function() {
+      console.log("Something went wrong");
+    }
+  });
+
+
+
+}
 
 
 // Getting Authentication for Google Blogger
