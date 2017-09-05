@@ -77,7 +77,10 @@ function getAccessToken (oauth2Client, callback) {
      // set tokens to the client
      // TODO: tokens should be set by OAuth2 client.
      oauth2Client.setCredentials(tokens);
+     
      console.log(tokens);
+     console.log(tokens.token);
+
      callback();
    });
  });
