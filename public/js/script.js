@@ -1,9 +1,25 @@
-var key,
-    blogId,
-    keyList = []
-    discoveryDocs = ["https://people.googleapis.com/$discovery/rest?version=v1"],
-    scopes = "profile";
+var key;
+var blogId = "4165291039125780596";
+var keyList = [];
+$.ajax({
+  url: "data/myjsonfile.json",
+  dataType: "json",
+  beforeSend: function(xhr) {
+    if (xhr.overrideMimeType) {
+      xhr.overrideMimeType("application/json");
+    }
 
+  },
+    success: function(DataFromJson){
+console.log(DataFromJson);
+
+  },
+  error: function() {
+    console.log("Something Went Wrong");
+
+  }
+
+});
 $.ajax({
   url: "data/config.json",
   dataType: "json",
@@ -14,6 +30,8 @@ $.ajax({
 
   },
     success: function(DataFromJson){
+console.log(DataFromJson);
+
 
       keyList.push({
         apiKey: DataFromJson.apiKey,
@@ -34,11 +52,18 @@ $.ajax({
 
 });
 
+$.ajax({
+  url: ""
+})
+
 function getStuff() {
   $.ajax({
     url: "https://www.googleapis.com/blogger/v3/blogs/"+blogId+"?key=" + key,
     dataType: "jsonp",
     success: function(DataFromBlog) {
+
+      console.log(DataFromBlog);
+
       console.log(DataFromBlog);
       $('.blogName').append(DataFromBlog.name);
       $('.blogUrl').append(DataFromBlog.url)
@@ -61,17 +86,13 @@ function getPosts(){
 
       console.log(DataFromBlog);
       for (var i = 0; i < DataFromBlog.items.length; i++) {
-
         $('.posts').append("<div class='post'><h1 class='h1title'>"+DataFromBlog.items[i].title+"</h1><p class='author'>"+DataFromBlog.items[i].author.displayName+"</p><p class='date'>"+new Date(DataFromBlog.items[i].published)+"</p><p class='content'>"+DataFromBlog.items[i].content+"</p></div>")
-
       }
-
     },
     error: function() {
       console.log("Something went wrong");
     }
   });
-
 }
 
 $("#postBlog").submit(function(event){
