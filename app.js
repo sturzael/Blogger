@@ -3,7 +3,10 @@ var app = express();
 var cors = require('cors');
 var path = require("path");
 var config = require("./data/config.json");
+<<<<<<< HEAD
+=======
 var readline = require("readline");
+>>>>>>> Massey
 
 var url;
 
@@ -115,5 +118,7 @@ app.post("/sendTitle=:title/sendMessage=:message", function(request, response){
 });
 
 app.listen(3000);
+
+console.log(config.apiKey);
 
 console.log("server running on port 3000");
