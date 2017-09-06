@@ -3,10 +3,7 @@ var app = express();
 var cors = require('cors');
 var path = require("path");
 var config = require("./data/config.json");
-<<<<<<< HEAD
-=======
 var readline = require("readline");
->>>>>>> Massey
 
 var url;
 
@@ -19,7 +16,7 @@ app.use(function(request, response, next){
 
 app.use(express.static("./public"));
 
-// Linking up config
+// Linking up config 
 app.use('/data', express.static(path.join(__dirname, 'data')));
 
 // jquery
@@ -39,12 +36,6 @@ app.use("/css", express.static(path.join(__dirname, "node_modules/bootstrap/dist
 // 	var message = request.params.message;
 // 	console.log(message);
 // });
-
-app.post("/sendTitle=:title/sendMessage=:message", function(request, response){
-	var title = request.params.title;
-	var message = request.params.message;
-
-});
 
 var google = require('googleapis');
 var OAuth2 = google.auth.OAuth2;
@@ -80,7 +71,10 @@ function getAccessToken (oauth2Client, callback) {
      // set tokens to the client
      // TODO: tokens should be set by OAuth2 client.
      oauth2Client.setCredentials(tokens);
+     
      console.log(tokens);
+     console.log(tokens.access_token);
+
      callback();
    });
  });
@@ -100,8 +94,26 @@ getAccessToken(oauth2Client, function () {
 	});
 });
 
-app.listen(3000);
+app.post("/sendTitle=:title/sendMessage=:message", function(request, response){
+  var title = request.params.title;
+  var message = request.params.message;
+  var params = {
+                  blogId:config.bloggerId,
+                  fetchBody:true,
+                  fetchImages:false,
+                  isDraft:true
+              };
+              
+  oauth2Client.post("https://www.googleapis.com/blogger/v3/blogs/" + config.bloggerId + "/posts", params, function(error, blog, bloggerResponse){
+    if (!error){
+      response.json(blog);
+    } else {
+      console.log(error);
+    }
+  });
+  
+});
 
-console.log(config.apiKey);
+app.listen(3000);
 
 console.log("server running on port 3000");
