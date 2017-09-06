@@ -13,14 +13,6 @@ $.ajax({
   },
     success: function(DataFromJson){
 
-    keyList.push({
-      apiKey: DataFromJson.apiKey,
-      clientId: DataFromJson.clientId,
-      clientSecret: DataFromJson.clientSecret
-    })
-
-    getStuff();
-
       keyList.push({
         apiKey: DataFromJson.apiKey,
         blogId:DataFromJson.blogId,
@@ -107,4 +99,3 @@ $("#postBlog").submit(function(event){
 
     console.log(title, message);
 });
->>>>>>> Massey
