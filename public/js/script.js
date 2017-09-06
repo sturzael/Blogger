@@ -1,7 +1,25 @@
 var key;
 var blogId = "4165291039125780596";
 var keyList = [];
+$.ajax({
+  url: "data/myjsonfile.json",
+  dataType: "json",
+  beforeSend: function(xhr) {
+    if (xhr.overrideMimeType) {
+      xhr.overrideMimeType("application/json");
+    }
 
+  },
+    success: function(DataFromJson){
+console.log(DataFromJson);
+
+  },
+  error: function() {
+    console.log("Something Went Wrong");
+
+  }
+
+});
 $.ajax({
   url: "data/config.json",
   dataType: "json",
@@ -12,7 +30,12 @@ $.ajax({
 
   },
     success: function(DataFromJson){
+console.log(DataFromJson);
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> master
       keyList.push({
         apiKey: DataFromJson.apiKey,
         blogId:DataFromJson.blogId,
@@ -31,6 +54,10 @@ $.ajax({
   }
 
 });
+
+$.ajax({
+  url: ""
+})
 
 function getStuff() {
   $.ajax({
@@ -98,4 +125,8 @@ $("#postBlog").submit(function(event){
     })
 
     console.log(title, message);
+<<<<<<< HEAD
 });
+=======
+});
+>>>>>>> master
