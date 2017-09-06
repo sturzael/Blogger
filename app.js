@@ -3,10 +3,12 @@ var app = express();
 var cors = require('cors');
 var path = require("path");
 var config = require("./data/config.json");
-<<<<<<< HEAD
-=======
+var fs = require('fs')
+
 var readline = require("readline");
->>>>>>> Massey
+app.get('blogger/app.js', function(req, res) {
+    var id = req.params.id;
+});
 
 var url;
 
@@ -19,7 +21,7 @@ app.use(function(request, response, next){
 
 app.use(express.static("./public"));
 
-// Linking up config 
+// Linking up config
 app.use('/data', express.static(path.join(__dirname, 'data')));
 
 // jquery
@@ -37,13 +39,20 @@ app.use("/css", express.static(path.join(__dirname, "node_modules/bootstrap/dist
 
 // app.post("/sendMessage=:message", function(request, response){
 // 	var message = request.params.message;
-// 	console.log(message);
+// 	console.log(message);ssd
 // });
+
+app.post("/sendTitle=:title/sendMessage=:message", function(request, response){
+	var title = request.params.title;
+	var message = request.params.message;
+
+});
 
 var google = require('googleapis');
 var OAuth2 = google.auth.OAuth2;
 var plus = google.plus('v1');
 var token;
+
 
 var rl = readline.createInterface({
     input: process.stdin,
@@ -74,11 +83,18 @@ function getAccessToken (oauth2Client, callback) {
      // set tokens to the client
      // TODO: tokens should be set by OAuth2 client.
      oauth2Client.setCredentials(tokens);
-     
      console.log(tokens);
-     console.log(tokens.access_token);
+     token = tokens.access_token;
 
+     var obj = {
+        table: []
+     };
+
+     obj.table.push({Atoken: token, url:url});
+     var json = JSON.stringify(obj);
+     fs.writeFile('./data/myjsonfile.json', json, 'utf8');
      callback();
+
    });
  });
 }
@@ -86,6 +102,7 @@ function getAccessToken (oauth2Client, callback) {
 // retrieve an access token
 getAccessToken(oauth2Client, function () {
 	console.log(oauth2Client);
+
 
 	// retrieve user profile
 	plus.people.get({ userId: 'me', auth: oauth2Client }, function (err, profile) {
@@ -95,26 +112,6 @@ getAccessToken(oauth2Client, function () {
 
 		console.log(profile.displayName, ':', profile.tagline);
 	});
-});
-
-app.post("/sendTitle=:title/sendMessage=:message", function(request, response){
-  var title = request.params.title;
-  var message = request.params.message;
-  var params = {
-                  blogId:config.bloggerId,
-                  fetchBody:true,
-                  fetchImages:false,
-                  isDraft:true
-              };
-              
-  oauth2Client.post("https://www.googleapis.com/blogger/v3/blogs/" + config.bloggerId + "/posts", params, function(error, blog, bloggerResponse){
-    if (!error){
-      response.json(blog);
-    } else {
-      console.log(error);
-    }
-  });
-  
 });
 
 app.listen(3000);
