@@ -37,12 +37,6 @@ app.use("/css", express.static(path.join(__dirname, "node_modules/bootstrap/dist
 // 	console.log(message);
 // });
 
-app.post("/sendTitle=:title/sendMessage=:message", function(request, response){
-	var title = request.params.title;
-	var message = request.params.message;
-	
-});
-
 var google = require('googleapis');
 var OAuth2 = google.auth.OAuth2;
 var plus = google.plus('v1');
@@ -79,7 +73,7 @@ function getAccessToken (oauth2Client, callback) {
      oauth2Client.setCredentials(tokens);
      
      console.log(tokens);
-     console.log(tokens.token);
+     console.log(tokens.access_token);
 
      callback();
    });
@@ -98,6 +92,26 @@ getAccessToken(oauth2Client, function () {
 
 		console.log(profile.displayName, ':', profile.tagline);
 	});
+});
+
+app.post("/sendTitle=:title/sendMessage=:message", function(request, response){
+  var title = request.params.title;
+  var message = request.params.message;
+  var params = {
+                  blogId:config.bloggerId,
+                  fetchBody:true,
+                  fetchImages:false,
+                  isDraft:true
+              };
+              
+  oauth2Client.post("https://www.googleapis.com/blogger/v3/blogs/" + config.bloggerId + "/posts", params, function(error, blog, bloggerResponse){
+    if (!error){
+      response.json(blog);
+    } else {
+      console.log(error);
+    }
+  });
+  
 });
 
 app.listen(3000);
