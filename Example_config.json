@@ -1,0 +1,13 @@
+{
+	"APIKey":"",
+	"project_id":"",
+	"ClientID":"",
+	"ClientSecret":""
+}
+/*READ*/
+/*project_id is just the blog id that we got from our actual blogger page*/
+/*normal ClientID and stuff*/
+/*only thing changed is that we have to change our redirect uri on our credentaials page,
+we were originally were using http://localhost:threethousand, but now its http://localhost:threethousand/sendPost*/
+/*This can be editted in the credentaials page where we get our client id and stuff from*/
+/*DELETE THESE COMMENTS OTHERWISE SERVER WONT RUN*/
