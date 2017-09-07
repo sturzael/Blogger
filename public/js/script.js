@@ -1,64 +1,20 @@
-var key;
-var blogId = "4165291039125780596";
-var keyList = [];
+var APIKey;
 $.ajax({
-  url: "data/myjsonfile.json",
-  dataType: "json",
-  beforeSend: function(xhr) {
-    if (xhr.overrideMimeType) {
-      xhr.overrideMimeType("application/json");
-    }
-
-  },
-    success: function(DataFromJson){
-console.log(DataFromJson);
-
-  },
-  error: function() {
-    console.log("Something Went Wrong");
-
-  }
-
-});
-$.ajax({
-  url: "data/config.json",
-  dataType: "json",
-  beforeSend: function(xhr) {
-    if (xhr.overrideMimeType) {
-      xhr.overrideMimeType("application/json");
-    }
-
-  },
-    success: function(DataFromJson){
-console.log(DataFromJson);
-
-
-      keyList.push({
-        apiKey: DataFromJson.apiKey,
-        blogId:DataFromJson.blogId,
-        clientId: DataFromJson.clientId,
-        clientSecret: DataFromJson.clientSecret
-      });
-
-      key = keyList[0].apiKey;
-      blogId = keyList[0].blogId;
-
-      getStuff();
-  },
-  error: function() {
-    console.log("Something Went Wrong");
-
-  }
-
+	url: "config/config.json",
+	dataType:"json",
+	success:function(data){
+		APIKey = data.APIKey;
+    blogId = data.project_id;
+    clientId = data.ClientID;
+    clientSecret = data.ClientSecret;
+		getStuff();
+	}
 });
 
-$.ajax({
-  url: ""
-})
 
 function getStuff() {
   $.ajax({
-    url: "https://www.googleapis.com/blogger/v3/blogs/"+blogId+"?key=" + key,
+    url: "https://www.googleapis.com/blogger/v3/blogs/"+blogId+"?key=" + APIKey,
     dataType: "jsonp",
     success: function(DataFromBlog) {
 
@@ -78,9 +34,8 @@ function getStuff() {
 }
 
 function getPosts(){
-
   $.ajax({
-    url: "https://www.googleapis.com/blogger/v3/blogs/"+blogId+"/posts?key=" + key,
+    url: "https://www.googleapis.com/blogger/v3/blogs/"+blogId+"/posts?key=" + APIKey,
     dataType: "jsonp",
     success: function(DataFromBlog) {
 
@@ -95,31 +50,32 @@ function getPosts(){
   });
 }
 
-$("#postBlog").submit(function(event){
-    event.preventDefault();
+$("#postForm").submit(function(event){
 
-    var title = $("#postTitle").val();
-    var message = $("#postMessage").val();
-    var url = "http://localhost:3000";
-
-    // Validation
-    if( (title.length === 0) || (message.length === 0) ){
-        alert("Please fill in both fields");
-        return;
-    } else {
-        url += "/sendTitle=" + title + "/sendMessage=" + message;
-    }
-
-    $.ajax({
-        url: url,
-        dataType:"json",
-        method:"post",
-        success:function(DataPost){
-            console.log(DataPost);
-        }, error:function(){
-            console.log("Error, server not responding.");
+	event.preventDefault();
+	console.log("form sent");
+	var title = $("#title").val();
+	var content = $("#content").val();
+	var url = "http://localhost:3000/createGoogleBloggerPost";
+	if(title.length == 0){
+		alert("please enter a title");
+		return;
+	}
+	if(content.length == 0){
+		alert("please enter some content");
+		return;
+	}
+	$.ajax({
+		url: url,
+		type: "post",
+		data: { title: title, content : content},
+		dataType:"json",
+        success: function(result) {
+   			console.log(result);
+        	window.location = result;
+        },
+        error:function(error){
+        	console.log(error);
         }
-    })
-
-    console.log(title, message);
+	})
 });
